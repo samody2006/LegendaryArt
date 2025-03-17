@@ -28,7 +28,7 @@ class ContactForm extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): static
     {
         return $this->markdown('email.contact',["form"=>$this->form]);
     }

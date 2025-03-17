@@ -1,17 +1,28 @@
 <?php
 
-use App\Service;
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(Service::class, function (Faker $faker) {
-    
-    $title = $faker->sentence(3);
+use App\Models\Service;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-    return [
-        'title' => $title,
-        'slug' => str_slug($title),
-        'description' => $faker->paragraph(4),
-        'price' => $faker->randomDigit(30,200),
-        'thumbnail' => $faker->imageUrl
-    ];
-});
+class ServiceFactory extends Factory
+{
+    protected $model = Service::class;
+
+    /**
+     * Define the model's default state.
+     */
+    public function definition(): array
+    {
+        $title = $this->faker->sentence(3);
+
+        return [
+            'title'      => $title,
+            'slug'       => Str::slug($title),
+            'description'=> $this->faker->paragraph(4),
+            'price'      => $this->faker->numberBetween(30, 200),
+            'thumbnail'  => $this->faker->imageUrl(640, 480, 'business', true),
+        ];
+    }
+}

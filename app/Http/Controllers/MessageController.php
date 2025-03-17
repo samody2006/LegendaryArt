@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 
-use App\Message;
+use App\Models\Message;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Jsonable;
 
 
 class MessageController extends Controller
@@ -55,7 +54,7 @@ class MessageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Message  $message
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
     public function show(Message $message)
@@ -68,7 +67,7 @@ class MessageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Message  $message
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,7 +79,7 @@ class MessageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Message  $message
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -91,7 +90,7 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Message  $message
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
     public function destroy(Message $message)

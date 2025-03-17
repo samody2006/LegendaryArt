@@ -1,13 +1,13 @@
 <?php
+namespace Database\Seeders;
 
-use App\Team;
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
 
 class TeamSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeders.
      *
      * @return void
      */

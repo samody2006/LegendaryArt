@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
-use App\Permission;
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -49,7 +49,7 @@ class RoleController extends Controller
         if($validator->fails()){
              return redirect()->back()->withErrors($validator);
           }
-        
+
         $dataExist = Role::where('name',$request->name)->first();
 
         if($dataExist){
@@ -57,21 +57,21 @@ class RoleController extends Controller
         Session::flash('type','danger');
         Session::flash('message','Role already exists');
         return redirect()->route('role.create');
- 
+
        }
-        
+
         $role = Role::create([
           'name' => str_slug($request->name),
          'display_name' => $request->display_name,
         'description' => $request->description,
         ]);
-        
+
         $role->attachPermissions($request->permissions);
-     
-        
+
+
         Session::flash('type','success');
         Session::flash('message','Role Successfully Created');
-        
+
         return redirect()->route('role.create');
     }
 
@@ -115,7 +115,7 @@ class RoleController extends Controller
             'description' => 'required'
         ]);
 
-        
+
 
     $role->update([
         'name' => str_slug($request->name),
@@ -124,12 +124,12 @@ class RoleController extends Controller
     ]);
 
     $role->syncPermissions($request->permissions);
-        
+
         session()->flash('type','success');
         session()->flash('message','Role Successfully Updated');
         return redirect()->route('role.index');
 
-        
+
     }
 
     /**

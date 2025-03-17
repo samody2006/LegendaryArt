@@ -1,12 +1,13 @@
 <?php
 
-use App\Album;
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class AlbumTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeders.
      *
      * @return void
      */

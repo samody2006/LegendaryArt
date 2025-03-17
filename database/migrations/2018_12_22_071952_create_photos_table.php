@@ -1,37 +1,32 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePhotosTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('photos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title',128);
-            $table->text('description');
-            $table->string('image',128);
-            $table->string('slug',128);
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('album_id');
+            $table->id();
+            $table->string('title', 128)->index();
+            $table->text('description')->nullable();
+            $table->string('image', 128);
+            $table->string('slug', 128)->unique()->index();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('album_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('photos');
     }
-}
+};

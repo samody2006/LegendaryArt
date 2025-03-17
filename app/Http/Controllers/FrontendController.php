@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Message;
-use App\Team;
-use App\Album;
-use App\Photo;
-use App\Service;
-use App\ContactInfo;
-use App\Mail\ContactForm;
+use App\Models\Album;
+use App\Models\ContactInfo;
+use App\Models\Message;
+use App\Models\Photo;
+use App\Models\Service;
+use App\Models\Team;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class FrontendController extends Controller

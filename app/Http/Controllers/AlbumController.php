@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Photo;
-use App\Album;
+use App\Models\Album;
 use Illuminate\Http\Request;
 
 class AlbumController extends Controller
@@ -62,7 +61,7 @@ class AlbumController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Album  $album
+     * @param  \App\Models\Album  $album
      * @return \Illuminate\Http\Response
      */
     public function show(Album $album)
@@ -74,7 +73,7 @@ class AlbumController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Album  $album
+     * @param  \App\Models\Album  $album
      * @return \Illuminate\Http\Response
      */
     public function edit(Album $album)
@@ -87,7 +86,7 @@ class AlbumController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Album  $album
+     * @param  \App\Models\Album  $album
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Album $album)
@@ -124,7 +123,7 @@ class AlbumController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Album  $album
+     * @param  \App\Models\Album  $album
      * @return \Illuminate\Http\Response
      */
     public function destroy(Album $album)
@@ -138,7 +137,7 @@ class AlbumController extends Controller
     /**
      * Show frontend Album
      *
-     * @param  \App\Album  $album
+     * @param  \App\Models\Album  $album
      * @return \Illuminate\Http\Response
      */
     public function catshow($slug)

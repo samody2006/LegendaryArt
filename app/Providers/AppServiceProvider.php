@@ -13,10 +13,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Blade::component('components.breadcrumb','breadcrumb');
- 
+
         if(config('app.env') === 'production') {
             URL::forceScheme('https');
         }

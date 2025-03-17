@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
+use App\Notifications\PasswordResetNotify;
+use App\Notifications\VerifyMail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Notifications\VerifyMail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use App\Notifications\PasswordResetNotify;
 
 class AuthController extends Controller
 {

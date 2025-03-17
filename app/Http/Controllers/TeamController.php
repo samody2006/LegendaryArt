@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Team;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -70,7 +70,7 @@ class TeamController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Team  $team
+     * @param  \App\Models\Team  $team
      * @return \Illuminate\Http\Response
      */
     public function show(Team $team)
@@ -81,7 +81,7 @@ class TeamController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Team  $team
+     * @param  \App\Models\Team  $team
      * @return \Illuminate\Http\Response
      */
     public function edit(Team $team)
@@ -93,7 +93,7 @@ class TeamController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Team  $team
+     * @param  \App\Models\Team  $team
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Team $team)
@@ -129,7 +129,7 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Team  $team
+     * @param  \App\Models\Team  $team
      * @return \Illuminate\Http\Response
      */
     public function destroy(Team $team)

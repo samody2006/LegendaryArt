@@ -2,29 +2,27 @@
 
 return [
     'role_structure' => [
-        'superadministrator' => [
+        'super-admin' => [
             'users' => 'c,r,u,d',
             'albums' => 'c,r,u,d',
             'photos' => 'c,r,u,d',
             'teams' => 'c,r,u,d',
             'services' => 'c,r,u,d',
-            'contactinfos' => 'c,r,u,d',
+            'contactInfos' => 'c,r,u,d',
             'acl' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
-        'administrator' => [
+        'admin' => [
             'users' => 'c,r,u,d',
             'albums' => 'c,r,u,d',
             'photos' => 'c,r,u,d',
             'teams' => 'c,r,u,d',
             'services' => 'c,r,u,d',
-            'contactinfos' => 'c,r,u,d',
+            'contactInfos' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
-        'contributor' => [
+        'user' => [
             'profile' => 'r,u',
-            'albums' => 'c,r,u,d',
-            'photos' => 'c,r,u,d',
         ],
     ],
     'permission_structure' => [

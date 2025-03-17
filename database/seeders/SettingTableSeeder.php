@@ -1,12 +1,15 @@
 <?php
 
-use App\Setting;
+namespace Database\Seeders;
+
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class SettingTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeders.
      *
      * @return void
      */
@@ -15,16 +18,15 @@ class SettingTableSeeder extends Seeder
         Setting::create([
             'key' => 'site_title',
             'display_name' => 'Site Title',
-            'slug' => str_slug('Site Title'),
-            'value' => 'Legendry Art',
+            'slug' => Str::slug('Site Title'),
+            'value' => 'Legendary Art',
         ]);
 
         Setting::create([
             'key' => 'site_copyright',
             'display_name' => 'Copyright Text',
-            'slug' => str_slug('Copyright Text'),
-            'value' => 'Designed by <a href="#" target="_blank">            Dr. Brain</a>',
+            'slug' => Str::slug('Copyright Text'),
+            'value' => 'Designed by <a href="#" target="_blank">Dr. Brain</a>',
         ]);
-
     }
 }

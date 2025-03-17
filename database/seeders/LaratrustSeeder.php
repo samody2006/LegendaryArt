@@ -1,17 +1,24 @@
 <?php
+
+namespace Database\Seeders;
+
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
+use App\Models\Role;
+use App\Models\Permission;
+use App\Models\User;
 
 class LaratrustSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeders.
      *
      * @return  void
      */
-    public function run()
+    public function run(): void
     {
         $this->command->info('Truncating User, Role and Permission tables');
         $this->truncateLaratrustTables();
@@ -23,7 +30,7 @@ class LaratrustSeeder extends Seeder
         foreach ($config as $key => $modules) {
 
             // Create a new role
-            $role = \App\Role::create([
+            $role = Role::create([
                 'name' => $key,
                 'display_name' => ucwords(str_replace('_', ' ', $key)),
                 'description' => ucwords(str_replace('_', ' ', $key))
@@ -35,11 +42,11 @@ class LaratrustSeeder extends Seeder
             // Reading role permission modules
             foreach ($modules as $module => $value) {
 
-                foreach (explode(',', $value) as $p => $perm) {
+                foreach (explode(',', $value) as $perm) {
 
                     $permissionValue = $mapPermission->get($perm);
 
-                    $permissions[] = \App\Permission::firstOrCreate([
+                    $permissions[] = Permission::firstOrCreate([
                         'name' => $permissionValue . '-' . $module,
                         'display_name' => ucfirst($permissionValue) . ' ' . ucfirst($module),
                         'description' => ucfirst($permissionValue) . ' ' . ucfirst($module),
@@ -55,14 +62,14 @@ class LaratrustSeeder extends Seeder
             $this->command->info("Creating '{$key}' user");
 
             // Create default user for each role
-            $user = \App\User::create([
+            $user = User::create([
                 'name' => ucwords(str_replace('_', ' ', $key)),
                 'email' => $key.'@app.com',
                 'email_verified_at' => Carbon::now(),
                 'password' => bcrypt('password')
             ]);
 
-            $user->attachRole($role);
+            $user->addRole($role); // Correct method in Laratrust 8
         }
 
         // Creating user with permissions
@@ -73,19 +80,19 @@ class LaratrustSeeder extends Seeder
                 foreach ($modules as $module => $value) {
 
                     // Create default user for each permission set
-                    $user = \App\User::create([
+                    $user = User::create([
                         'name' => ucwords(str_replace('_', ' ', $key)),
                         'email' => $key.'@app.com',
                         'password' => bcrypt('password'),
-                        'remember_token' => str_random(10),
+                        'remember_token' => Str::random(10),
                     ]);
                     $permissions = [];
 
-                    foreach (explode(',', $value) as $p => $perm) {
+                    foreach (explode(',', $value) as $perm) {
 
                         $permissionValue = $mapPermission->get($perm);
 
-                        $permissions[] = \App\Permission::firstOrCreate([
+                        $permissions[] = Permission::firstOrCreate([
                             'name' => $permissionValue . '-' . $module,
                             'display_name' => ucfirst($permissionValue) . ' ' . ucfirst($module),
                             'description' => ucfirst($permissionValue) . ' ' . ucfirst($module),
@@ -96,7 +103,7 @@ class LaratrustSeeder extends Seeder
                 }
 
                 // Attach all permissions to the user
-                $user->permissions()->sync($permissions);
+                $user->syncPermissions($permissions);
             }
         }
     }
@@ -106,15 +113,15 @@ class LaratrustSeeder extends Seeder
      *
      * @return    void
      */
-    public function truncateLaratrustTables()
+    public function truncateLaratrustTables(): void
     {
         Schema::disableForeignKeyConstraints();
         DB::table('permission_role')->truncate();
         DB::table('permission_user')->truncate();
         DB::table('role_user')->truncate();
-        \App\User::truncate();
-        \App\Role::truncate();
-        \App\Permission::truncate();
+        User::truncate();
+        Role::truncate();
+        Permission::truncate();
         Schema::enableForeignKeyConstraints();
     }
 }

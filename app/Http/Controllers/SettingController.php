@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Setting;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -55,28 +55,28 @@ class SettingController extends Controller
             if($validator->fails()){
                  return redirect()->back()->withErrors($validator);
               }
-    
-    
-              
-              
+
+
+
+
             $setting = Setting::create([
               'key' => $request->key,
              'slug' => str_slug($request->key),
             'display_name' => $request->display_name,
             'value' => $request->value
             ]);
-            
+
             Session::flash('type','success');
             Session::flash('message','Setting Successfully Created');
-            
+
             return redirect()->route('settings.index');
-    
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Setting  $setting
+     * @param  \App\Models\Setting  $setting
      * @return \Illuminate\Http\Response
      */
     public function show(Setting $setting)
@@ -87,7 +87,7 @@ class SettingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Setting  $setting
+     * @param  \App\Models\Setting  $setting
      * @return \Illuminate\Http\Response
      */
     public function edit(Setting $setting)
@@ -101,7 +101,7 @@ class SettingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Setting  $setting
+     * @param  \App\Models\Setting  $setting
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Setting $setting)
@@ -115,7 +115,7 @@ class SettingController extends Controller
         if($validation->fails()){
             return redirect()->back()->withErrors($validation);
          }
-           
+
 
 
             $setting->update([
@@ -125,18 +125,18 @@ class SettingController extends Controller
                 'value' => $request->value
             ]);
 
-                
+
                 session()->flash('type','success');
                 session()->flash('message','Setting Successfully Updated');
                 return redirect()->route('settings.index');
 
-                
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Setting  $setting
+     * @param  \App\Models\Setting  $setting
      * @return \Illuminate\Http\Response
      */
     public function destroy(Setting $setting)

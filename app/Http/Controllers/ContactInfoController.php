@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ContactInfo;
+use App\Models\ContactInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -51,28 +51,28 @@ class ContactInfoController extends Controller
              return redirect()->back()->withErrors($validator);
           }
 
-        
+
         $info = ContactInfo::create([
           'title' => $request->title,
          'slug' => str_slug($request->title),
         'description' => $request->description
         ]);
-        
-        
+
+
         Session::flash('type','success');
         Session::flash('message','Info Successfully Created');
-        
+
         return redirect()->route('contactinfo.create');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ContactInfo  $contactInfo
+     * @param  \App\Models\ContactInfo  $contactInfo
      * @return \Illuminate\Http\Response
      */
     public function show($contactInfo)
-    {   
+    {
         $info = ContactInfo::where('slug',$contactInfo)->first();
         $data['contactInfo'] = $info;
         return view('backend.contactinfo.show',$data);
@@ -81,7 +81,7 @@ class ContactInfoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ContactInfo  $contactInfo
+     * @param  \App\Models\ContactInfo  $contactInfo
      * @return \Illuminate\Http\Response
      */
     public function edit($contactInfo)
@@ -94,7 +94,7 @@ class ContactInfoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ContactInfo  $contactInfo
+     * @param  \App\Models\ContactInfo  $contactInfo
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $contactInfo)
@@ -112,7 +112,7 @@ class ContactInfoController extends Controller
         'description' => $request->description,
     ]);
 
-        
+
         session()->flash('type','success');
         session()->flash('message','Contact Info Successfully Updated');
         return redirect()->route('contactinfo.index');
@@ -122,7 +122,7 @@ class ContactInfoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ContactInfo  $contactInfo
+     * @param  \App\Models\ContactInfo  $contactInfo
      * @return \Illuminate\Http\Response
      */
     public function destroy(ContactInfo $contactInfo)

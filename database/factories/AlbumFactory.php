@@ -1,15 +1,26 @@
 <?php
 
-use App\Album;
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(Album::class, function (Faker $faker) {
-   
-    $name = $faker->word;
+use App\Models\Album;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-    return [
-        "name"=> $faker->word,
-        "slug" => str_slug($name),
-        "banner" => $faker->imageUrl
-    ];
-});
+class AlbumFactory extends Factory
+{
+    protected $model = Album::class;
+
+    /**
+     * Define the model's default state.
+     */
+    public function definition(): array
+    {
+        $name = $this->faker->word;
+
+        return [
+            "name"   => $name,
+            "slug"   => Str::slug($name),
+            "banner" => $this->faker->imageUrl(640, 480, 'nature', true),
+        ];
+    }
+}

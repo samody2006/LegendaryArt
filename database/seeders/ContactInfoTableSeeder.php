@@ -1,35 +1,38 @@
 <?php
 
-use App\ContactInfo;
-use Illuminate\Database\Seeder;
-use Faker\Generator as Faker;
+namespace Database\Seeders;
 
-class contactinfoTableSeeder extends Seeder
+use App\Models\ContactInfo;
+use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
+
+class ContactInfoTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeders.
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run(): void
     {
+        $faker = Faker::create();
+
         ContactInfo::create([
             'title' => 'Phone',
             'slug' => 'phone',
-            'description' => $faker->phoneNumber      
+            'description' => $faker->phoneNumber,
         ]);
 
         ContactInfo::create([
             'title' => 'Email',
             'slug' => 'email',
-            'description' => $faker->email      
+            'description' => $faker->email,
         ]);
 
         ContactInfo::create([
             'title' => 'Address',
             'slug' => 'address',
-            'description' => $faker->address      
+            'description' => $faker->address,
         ]);
-    
     }
 }
